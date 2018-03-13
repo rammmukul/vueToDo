@@ -1,13 +1,7 @@
 <template>
   <div id="app">
-    <div v-for="todoList in todoLists">
-      <div v-text="todoList.title"></div>
-       <ul>
-         <li v-for="todo in todoList.todos" :class="{isDone: todo.todo.isDone}">{{ todo.todo.title }}</li>
-       </ul>
-    </div>
-    <hr>
-    <todoList/>
+    <todoList v-for="todoList in todoLists" :key="todoList.title" :data="todoList">
+    </todoList>
   </div>
 </template>
 
@@ -28,52 +22,40 @@ export default {
           title: "grocery",
           todos: [
             {
-              todo: {
-                title: "do this",
-                isDone: false,
-                timeStamp: 1520832857240
-              }
+              title: "do this",
+              isDone: false,
+              timeStamp: 1520832857240
             },
             {
-              todo: {
-                title: "do that",
-                isDone: false,
-                timeStamp: 1520832857500
-              }
+              title: "do that",
+              isDone: true,
+              timeStamp: 1520832857240
             },
             {
-              todo: {
-                title: "do this too",
-                isDone: true,
-                timeStamp: 1520832857512
-              }
+              title: "do this too",
+              isDone: false,
+              timeStamp: 1520832857240
             }
           ]
         },
         {
-          title: "outDoors",
+          title: "work",
           todos: [
             {
-              todo: {
-                title: "do this",
-                isDone: false,
-                timeStamp: 1520832857240
-              }
+              title: "do this",
+              isDone: true,
+              timeStamp: 1520832857240
             },
             {
-              todo: {
-                title: "do that",
-                isDone: false,
-                timeStamp: 1520832857500
-              }
+              title: "do that",
+              isDone: false,
+              timeStamp: 1520832857240
             },
             {
-              todo: {
-                title: "do this too",
-                isDone: true,
-                timeStamp: 1520832857512
-              }
-            }
+              title: "do this too",
+              isDone: false,
+              timeStamp: 1520832857240
+            },
           ]
         }
       ]

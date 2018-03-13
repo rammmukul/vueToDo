@@ -1,24 +1,17 @@
 <template>
-  <div class="todo">
-      {{ todoList.todo.title }}
+  <div class="todo" :class="{ isDone: data.isDone }">
+      {{ data.title }}
   </div>
 </template>
 
 <script>
 export default {
   name: "todo",
+  props: ['data'],
   data() {
-    return {
-      todoList: {
-        todo: {
-          title: "do this",
-          isDone: false,
-          timeStamp: 1520832857240
-        }
-      }
-    };
+    return {}
   }
-};
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
