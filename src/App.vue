@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <div id="sidebar"><div></div></div>
     <todoList v-for="todoList in todoLists" :key="todoList.title" :data="todoList">
     </todoList>
   </div>
@@ -22,40 +23,23 @@ export default {
           title: "grocery",
           todos: [
             {
+              id: '0',
               title: "do this",
               isDone: false,
               timeStamp: 1520832857240
             },
             {
+              id: '1',
               title: "do that",
               isDone: true,
               timeStamp: 1520832857240
             },
             {
+              id: '2',
               title: "do this too",
               isDone: false,
               timeStamp: 1520832857240
             }
-          ]
-        },
-        {
-          title: "work",
-          todos: [
-            {
-              title: "do this",
-              isDone: true,
-              timeStamp: 1520832857240
-            },
-            {
-              title: "do that",
-              isDone: false,
-              timeStamp: 1520832857240
-            },
-            {
-              title: "do this too",
-              isDone: false,
-              timeStamp: 1520832857240
-            },
           ]
         }
       ]

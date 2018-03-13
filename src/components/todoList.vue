@@ -2,8 +2,10 @@
   <div class="todoList">
     {{ data.title }}
     <ul>
-      <li is="todo" v-for="todo in data.todos" :key="todo.title" :data="todo"></li>
+      <li is="todo" v-for="todo in data.todos" :key="todo.title" :data="todo" @remove="removeTodo($event)"></li>
     </ul>
+    <input type="text" v-model="newTodoTitle" v-on:keyup.enter="add" placeholder="Add a todo"/>
+    <button v-on:click="add()" >add</button>
   </div>
 </template>
 
@@ -17,7 +19,29 @@ export default {
   name: "todoList",
   props: ['data'],
   data() {
-    return {}
+    return {
+      newTodoTitle:''
+    }
+  },
+  methods: {
+    add() {
+      if (!this.newTodoTitle) {
+        return 1
+      }
+      if (this.data.todos.filter(e => e.title === this.newTodoTitle).length!==0) {
+        return 1
+      }
+      this.data.todos.push({
+        title: this.newTodoTitle,
+        isDone: false,
+        timeStamp: Date.now()
+      })
+      this.newTodoTitle = ''
+    },
+    removeTodo (todo) {
+      console.log('got "remove" with', todo)
+      this.data.todos = this.data.todos.filter(e => e.title !== todo)
+    }
   }
 }
 </script>
