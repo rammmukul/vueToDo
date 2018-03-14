@@ -1,6 +1,7 @@
 #sidebar {
   box-sizing: border-box;
   height: 100vh;
+  padding: 2em;
   width: 20vw;
   float: left;
   background-color: rgb(255, 237, 134);

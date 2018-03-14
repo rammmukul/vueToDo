@@ -1,6 +1,7 @@
 <template>
   <div class="todoList">
     {{ data.title }}
+    <button class="remove" v-on:click="remove">x</button>
     <ul>
       <li is="todo" v-for="todo in data.todos" :key="todo.title" :data="todo" @remove="removeTodo($event)"></li>
     </ul>
@@ -41,6 +42,10 @@ export default {
     removeTodo (todo) {
       console.log('got "remove" with', todo)
       this.data.todos = this.data.todos.filter(e => e.title !== todo)
+    },
+    remove () {
+      console.log('todo remove', this.data.title)
+      this.$emit('removeTodoList', this.data.title)
     }
   }
 }
