@@ -1,6 +1,7 @@
 <template>
   <div id="app">
     <div id="sidebar">
+      <h1>Todos</h1>
       <input type="text" v-model="newTodoListTitle" v-on:keyup.enter="add" placeholder="Add a todoList"/>
       <button v-on:click="add()" >add</button>
     </div>
@@ -63,6 +64,15 @@ export default {
     removeTodoList (todoList) {
       console.log('got "remove" with', todoList)
       this.todoLists = this.todoLists.filter(e => e.title !== todoList)
+    }
+  },
+  watch: {
+    todoLists: {
+      handler: function (val) {
+        console.log('****************')
+        console.log(JSON.stringify(val,null,2))
+      },
+      deep: true
     }
   }
 };
