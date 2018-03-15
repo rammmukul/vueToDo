@@ -5,7 +5,13 @@
       <input type="text" v-model="newTodoListTitle" v-on:keyup.enter="add" placeholder="Add a todoList"/>
       <button v-on:click="add()" >add</button>
     </div>
-    <todoList v-for="todoList in todoLists" :key="todoList.title" :data="todoList" @removeTodoList="removeTodoList">
+    <todoList v-for="todoList in todoLists" 
+      :key="todoList.title" 
+      :data="todoList" 
+      @addTodo="addTodo"
+      @updateState="updateState" 
+      @removeTodo="removeTodo"
+      @removeTodoList="removeTodoList">
     </todoList>
   </div>
 </template>
@@ -55,24 +61,26 @@ export default {
       if (this.todoLists.filter(e => e.title === this.newTodoListTitle).length!==0) {
         return 1
       }
-      this.todoLists.push({
+      let newTodoList = {
         title: this.newTodoListTitle,
         todos: []
-      })
+      }
+      this.todoLists.push(newTodoList)
       this.newTodoTitle = ''
+      console.log('App addTodoList', newTodoList)
+    },
+    addTodo (todo) {
+      console.log('App addTodo', todo)
+    },
+    updateState (todo) {
+      console.log('App updateState', todo)
+    },
+    removeTodo (todo) {
+      console.log('App remove', todo)
     },
     removeTodoList (todoList) {
-      console.log('got "remove" with', todoList)
+      console.log('App got "remove" with', todoList)
       this.todoLists = this.todoLists.filter(e => e.title !== todoList)
-    }
-  },
-  watch: {
-    todoLists: {
-      handler: function (val) {
-        console.log('****************')
-        console.log(JSON.stringify(val,null,2))
-      },
-      deep: true
     }
   }
 };

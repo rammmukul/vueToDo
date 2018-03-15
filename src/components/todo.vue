@@ -19,9 +19,9 @@ export default {
   methods: {
     updateState() {
       this.data.isDone = !this.data.isDone;
+      this.$emit('updateState', this.data.title)
     },
     remove () {
-      console.log('todo remove', this.data.title)
       this.$emit('remove', this.data.title)
     }
   }

@@ -3,7 +3,13 @@
     {{ data.title }}
     <button class="remove" v-on:click="remove">x</button>
     <ul>
-      <li is="todo" v-for="todo in data.todos" :key="todo.title" :data="todo" @remove="removeTodo($event)"></li>
+      <li is="todo"
+        v-for="todo in data.todos"
+        :key="todo.title" 
+        :data="todo" 
+        @updateState="updateState($event)"
+        @remove="removeTodo($event)">
+      </li>
     </ul>
     <input type="text" v-model="newTodoTitle" v-on:keyup.enter="add" placeholder="Add a todo"/>
     <button v-on:click="add()" >add</button>
@@ -32,19 +38,23 @@ export default {
       if (this.data.todos.filter(e => e.title === this.newTodoTitle).length!==0) {
         return 1
       }
-      this.data.todos.push({
+      let NewTodo = {
         title: this.newTodoTitle,
         isDone: false,
         timeStamp: Date.now()
-      })
+      }
+      this.data.todos.push(NewTodo)
       this.newTodoTitle = ''
+      this.$emit('addTodo', [this.data.title, NewTodo])
+    },
+    updateState (todo) {
+      this.$emit('updateState', [this.data.title, todo])
     },
     removeTodo (todo) {
-      console.log('got "remove" with', todo)
       this.data.todos = this.data.todos.filter(e => e.title !== todo)
+      this.$emit('removeTodo', [this.data.title, todo])
     },
     remove () {
-      console.log('todo remove', this.data.title)
       this.$emit('removeTodoList', this.data.title)
     }
   }
